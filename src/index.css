@@ -1,0 +1,20 @@
+@import 'tailwindcss';
+
+@layer base {
+  :root {
+    color-scheme: light;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-50 antialiased;
+  }
+
+  a {
+    @apply text-emerald-400 hover:text-emerald-300;
+  }
+}
+
