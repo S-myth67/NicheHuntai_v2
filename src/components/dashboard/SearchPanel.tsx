@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { motion, AnimatePresence } from 'framer-motion'
 import { runMockNicheSearch } from '@/lib/mockSearch'
-import type { NicheCategory, NicheCostLevel } from '@/types/niche'
+import type { NicheCategory, NicheCostLevel, NicheSearchResult } from '@/types/niche'
 import { NicheCard } from '@/components/dashboard/NicheCard'
 import { useAppStore } from '@/store/appStore'
 
@@ -43,7 +43,7 @@ export function SearchPanel() {
   const freeLimit = 3
   const reachedLimit = isFreeUser && searchCount >= freeLimit
 
-  const mutation = useMutation({
+  const mutation = useMutation<NicheSearchResult>({
     mutationFn: () =>
       runMockNicheSearch({
         profession: profession.trim(),
