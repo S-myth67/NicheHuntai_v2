@@ -3,19 +3,21 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/cn'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:opacity-50 disabled:cursor-not-allowed',
+  'inline-flex items-center justify-center rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]',
   {
     variants: {
       variant: {
         primary:
-          'bg-emerald-500 text-slate-950 hover:bg-emerald-400 shadow-md shadow-emerald-500/20',
+          'bg-black text-white hover:bg-zinc-800 font-semibold shadow-sm',
         outline:
-          'border border-slate-700 bg-transparent text-slate-50 hover:bg-slate-900',
-        ghost: 'text-slate-50 hover:bg-slate-900',
+          'border border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-50 hover:border-zinc-400',
+        secondary:
+          'bg-zinc-100 text-zinc-900 hover:bg-zinc-200 border border-zinc-200',
+        ghost: 'text-zinc-700 hover:bg-zinc-100 hover:text-black',
       },
       size: {
-        sm: 'px-3 py-1.5',
-        md: 'px-4 py-2',
+        sm: 'px-3 py-1.5 text-xs',
+        md: 'px-4 py-2 text-sm',
         lg: 'px-5 py-2.5 text-base',
       },
     },
@@ -39,5 +41,3 @@ export function Button({ children, className, variant, size, ...rest }: ButtonPr
     </button>
   )
 }
-
-

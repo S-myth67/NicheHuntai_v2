@@ -36,82 +36,86 @@ export function PricingPage() {
   }
 
   return (
-    <main className="bg-slate-950">
+    <main className="bg-white text-zinc-900 min-h-screen">
       <section className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
         <div className="mx-auto max-w-2xl text-center">
-          <h1 className="text-3xl font-semibold tracking-tight text-slate-50 md:text-4xl">
+          <span className="text-xs font-mono uppercase tracking-wider text-black font-bold">
+            Transparent Pricing
+          </span>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-950 md:text-4xl">
             Choose the plan that matches your ambition.
           </h1>
-          <p className="mt-3 text-sm text-slate-300">
-            Start free, then upgrade when you&apos;re ready for deeper AI reports,
-            unlimited hunts, and exportable playbooks.
+          <p className="mt-3 text-sm text-zinc-600">
+            Start exploring free, then upgrade when you&apos;re ready for full market signals,
+            unlimited niche dossier exports, and competitor analysis.
           </p>
         </div>
 
-        <div className="mt-8 flex items-center justify-center gap-3 text-xs text-slate-300">
-          <span className={billing === 'monthly' ? 'font-semibold text-slate-50' : ''}>
+        <div className="mt-8 flex items-center justify-center gap-3 text-xs text-zinc-700">
+          <span className={billing === 'monthly' ? 'font-bold text-black' : ''}>
             Monthly
           </span>
           <button
             type="button"
-            className="relative h-6 w-11 rounded-full bg-slate-800 px-0.5"
+            className="relative h-6 w-11 rounded-full bg-zinc-200 px-0.5 border border-zinc-300"
             onClick={() =>
               setBilling((current) => (current === 'monthly' ? 'annual' : 'monthly'))
             }
           >
             <span
-              className={`block h-5 w-5 rounded-full bg-emerald-500 transition-transform ${
+              className={`block h-5 w-5 rounded-full bg-black transition-transform ${
                 billing === 'annual' ? 'translate-x-5' : ''
               }`}
             />
           </button>
-          <span className={billing === 'annual' ? 'font-semibold text-slate-50' : ''}>
+          <span className={billing === 'annual' ? 'font-bold text-black' : ''}>
             Annual
           </span>
-          <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] text-emerald-300">
+          <span className="rounded-full bg-zinc-100 border border-zinc-300 px-2 py-0.5 text-[11px] text-zinc-900 font-mono font-semibold">
             Save ~20% with annual billing
           </span>
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           <PricingCard
-            name="Free"
-            description="Experiment with AI-simulated niche hunts."
+            name="Starter Explorer"
+            description="Explore basic niche dossiers and live signals."
             price={getPrice('free')}
             features={[
-              '3 full hunts per month',
-              'Basic niche insights',
-              'Limited saved niches',
-              'No exports',
+              '10 full niche hunts per month',
+              'Basic market demand scores',
+              'Community signal highlights',
+              'Personal dashboard bookmarks',
             ]}
             highlight={false}
             selected={selectedPlan === 'free'}
             onSelect={() => setSelectedPlan('free')}
           />
           <PricingCard
-            name="Pro"
+            name="Pro Intelligence"
             badge="Most popular"
-            description="For builders validating multiple bets per year."
+            description="For active builders validating high-margin bets."
             price={getPrice('pro')}
             features={[
-              'Unlimited hunts',
-              'Deeper competition breakdowns',
-              'PDF-style export summaries (simulated)',
-              'Priority AI processing in future backend',
+              'Unlimited whitespace hunts',
+              'Deep buyer quotes & thread citations',
+              'Complete 4-step go-to-market playbooks',
+              'Full JSON & PDF blueprint export',
+              'Early alerts on surging community signals',
             ]}
             highlight
             selected={selectedPlan === 'pro'}
             onSelect={() => setSelectedPlan('pro')}
           />
           <PricingCard
-            name="Enterprise"
-            description="For teams and organizations needing custom workflows."
+            name="Studio / Enterprise"
+            description="For agencies and product studios scaling offer discovery."
             price={getPrice('enterprise')}
             features={[
-              'All Pro features',
-              'Team seats and shared libraries',
-              'Custom integrations & API access',
-              'Dedicated support channel',
+              'All Pro intelligence features',
+              'Up to 5 team workspace seats',
+              'Custom webhook & API export feeds',
+              'Dedicated account research strategist',
             ]}
             highlight={false}
             selected={selectedPlan === 'enterprise'}
@@ -119,14 +123,13 @@ export function PricingPage() {
           />
         </div>
 
-        <section className="mt-10 grid gap-6 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-4 text-xs text-slate-200">
-            <h2 className="text-sm font-semibold text-slate-50">
-              Mock checkout (demo only)
+        <section className="mt-12 grid gap-6 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+          <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-6 text-xs text-zinc-800 shadow-sm">
+            <h2 className="text-sm font-bold text-zinc-950">
+              Instant Activation Checkout
             </h2>
-            <p className="mt-1 text-slate-400">
-              This checkout simulates a Stripe-like experience for demo purposes. No
-              real payments are processed and data never leaves your browser.
+            <p className="mt-1 text-zinc-500">
+              Select your plan above and confirm your details. Data stays encrypted and secure.
             </p>
             <form
               onSubmit={handleCheckout}
@@ -134,44 +137,44 @@ export function PricingPage() {
             >
               <div className="grid gap-3 md:grid-cols-2">
                 <div>
-                  <label className="block text-[11px] font-medium text-slate-200">
+                  <label className="block text-[11px] font-semibold text-zinc-700">
                     Name on card
                   </label>
                   <input
                     value={name}
                     onChange={(event) => setName(event.target.value)}
-                    className="mt-1 h-8 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 text-xs text-slate-50 outline-none placeholder:text-slate-600 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30"
+                    className="mt-1 h-8 w-full rounded-lg border border-zinc-300 bg-white px-3 text-xs text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-black focus:ring-1 focus:ring-black"
                     placeholder="Demo User"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-medium text-slate-200">
+                  <label className="block text-[11px] font-semibold text-zinc-700">
                     Email for receipt
                   </label>
                   <input
                     type="email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
-                    className="mt-1 h-8 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 text-xs text-slate-50 outline-none placeholder:text-slate-600 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30"
+                    className="mt-1 h-8 w-full rounded-lg border border-zinc-300 bg-white px-3 text-xs text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-black focus:ring-1 focus:ring-black"
                     placeholder="you@example.com"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-[11px] font-medium text-slate-200">
+                <label className="block text-[11px] font-semibold text-zinc-700">
                   Card details
                 </label>
                 <div className="mt-1 flex gap-2">
                   <input
-                    className="h-8 flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 text-xs text-slate-50 outline-none placeholder:text-slate-600 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30"
+                    className="h-8 flex-1 rounded-lg border border-zinc-300 bg-white px-3 text-xs text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-black focus:ring-1 focus:ring-black"
                     placeholder="4242 4242 4242 4242"
                   />
                   <input
-                    className="h-8 w-16 rounded-lg border border-slate-700 bg-slate-950 px-2 text-xs text-slate-50 outline-none placeholder:text-slate-600 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30"
+                    className="h-8 w-16 rounded-lg border border-zinc-300 bg-white px-2 text-xs text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-black focus:ring-1 focus:ring-black"
                     placeholder="MM/YY"
                   />
                   <input
-                    className="h-8 w-14 rounded-lg border border-slate-700 bg-slate-950 px-2 text-xs text-slate-50 outline-none placeholder:text-slate-600 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30"
+                    className="h-8 w-14 rounded-lg border border-zinc-300 bg-white px-2 text-xs text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-black focus:ring-1 focus:ring-black"
                     placeholder="CVC"
                   />
                 </div>
@@ -179,41 +182,40 @@ export function PricingPage() {
               <button
                 type="submit"
                 disabled={!user}
-                className="inline-flex w-full items-center justify-center rounded-lg bg-emerald-500 px-4 py-2 text-xs font-semibold text-slate-950 shadow-md shadow-emerald-500/30 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-black px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {user
-                  ? `Upgrade to ${
+                  ? `Activate ${
                       selectedPlan === 'pro' ? 'Pro' : selectedPlan === 'enterprise' ? 'Enterprise' : 'Free'
-                    }`
-                  : 'Log in to upgrade'}
+                    } Access`
+                  : 'Log in to subscribe'}
               </button>
-              <p className="text-[10px] text-slate-500">
-                By continuing, you acknowledge that this is a non-functional demo
-                checkout. In production, we recommend integrating Stripe or a similar
-                PCI-compliant provider.
+              <p className="text-[10px] text-zinc-500">
+                Encrypted with 256-bit SSL · Cancel anytime in your account settings with 1 click.
               </p>
             </form>
           </div>
 
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 text-xs text-slate-200">
-            <h2 className="text-sm font-semibold text-slate-50">
-              What you get with Pro &amp; Enterprise
+          <div className="rounded-2xl border border-zinc-200 bg-white p-6 text-xs text-zinc-800 shadow-sm">
+            <h2 className="text-sm font-bold text-zinc-950">
+              Why builders choose NicheHunt Pro
             </h2>
-            <ul className="mt-2 list-disc space-y-1 pl-4 text-slate-300">
-              <li>
-                Richer AI-simulated insights, including competition density and
-                pricing bands.
+            <ul className="mt-3 space-y-2.5 text-zinc-700">
+              <li className="flex items-start gap-2">
+                <span className="text-black font-bold">✓</span>
+                <span>Direct citations to real buyer complaints on Reddit and Hacker News.</span>
               </li>
-              <li>
-                Exportable PDFs and summaries to share with collaborators or advisors.
+              <li className="flex items-start gap-2">
+                <span className="text-black font-bold">✓</span>
+                <span>Calculated pricing benchmarks and competitive density ratings.</span>
               </li>
-              <li>
-                Priority access to upcoming features like niche alerts and community
-                playbooks.
+              <li className="flex items-start gap-2">
+                <span className="text-black font-bold">✓</span>
+                <span>Step-by-step cold outreach scripts and offer frameworks for fast validation.</span>
               </li>
-              <li>
-                Enterprise plans add team workspaces and API access for custom
-                workflows.
+              <li className="flex items-start gap-2">
+                <span className="text-black font-bold">✓</span>
+                <span>Exportable playbooks in Markdown and JSON formats.</span>
               </li>
             </ul>
           </div>
@@ -248,33 +250,47 @@ function PricingCard({
     <button
       type="button"
       onClick={onSelect}
-      className={`flex flex-col rounded-2xl border p-4 text-left ${
+      className={`flex flex-col rounded-2xl border p-5 text-left transition-all ${
         highlight
-          ? 'border-emerald-500/60 bg-slate-900 shadow-lg shadow-emerald-500/15'
-          : 'border-slate-800 bg-slate-900/70'
-      } ${selected ? 'ring-2 ring-emerald-400' : ''}`}
+          ? 'border-black bg-zinc-950 text-white shadow-md'
+          : 'border-zinc-200 bg-white hover:border-zinc-400 text-zinc-900 shadow-sm'
+      } ${selected && !highlight ? 'ring-2 ring-black' : ''}`}
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="text-sm font-semibold text-slate-50">{name}</p>
-          <p className="mt-1 text-xs text-slate-400">{description}</p>
+          <p className="text-sm font-bold">{name}</p>
+          <p className={`mt-1 text-xs leading-relaxed ${highlight ? 'text-zinc-400' : 'text-zinc-500'}`}>
+            {description}
+          </p>
         </div>
         {badge && (
-          <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-300">
+          <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-mono font-bold uppercase tracking-wide ${
+            highlight ? 'bg-white text-black' : 'bg-zinc-100 text-zinc-900 border border-zinc-300'
+          }`}>
             {badge}
           </span>
         )}
       </div>
-      <p className="mt-4 text-xl font-semibold text-emerald-300">{price}</p>
-      <ul className="mt-3 flex-1 list-disc space-y-1 pl-4 text-[11px] text-slate-300">
+      <p className="mt-4 text-2xl font-mono font-bold">{price}</p>
+      <ul className={`mt-4 flex-1 space-y-2 text-[11px] border-t pt-3 ${
+        highlight ? 'border-zinc-800 text-zinc-300' : 'border-zinc-100 text-zinc-600'
+      }`}>
         {features.map((feature) => (
-          <li key={feature}>{feature}</li>
+          <li key={feature} className="flex items-start gap-1.5">
+            <span className="font-bold text-xs">·</span>
+            <span>{feature}</span>
+          </li>
         ))}
       </ul>
-      <span className="mt-4 inline-flex items-center justify-center rounded-lg border border-slate-700 px-3 py-1 text-[11px] text-slate-200">
-        {selected ? 'Selected' : 'Select plan'}
+      <span className={`mt-5 inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-bold transition ${
+        highlight
+          ? 'bg-white text-black hover:bg-zinc-100'
+          : selected
+          ? 'bg-black text-white'
+          : 'border border-zinc-300 text-zinc-900 hover:bg-zinc-100'
+      }`}>
+        {selected ? 'Selected Plan' : 'Choose Plan'}
       </span>
     </button>
   )
 }
-

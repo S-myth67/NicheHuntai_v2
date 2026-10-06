@@ -1,45 +1,59 @@
 import { useAppStore } from '@/store/appStore'
 
 export function HistoryPanel() {
-  const { searchHistory } = useAppStore()
-
-  if (searchHistory.length === 0) {
-    return (
-      <div className="rounded-2xl border border-dashed border-slate-800 bg-slate-950/40 p-4 text-xs text-slate-400">
-        Your recent hunts will appear here, including when you ran them and how
-        many ideas were returned.
-      </div>
-    )
-  }
+  const { searchHistory, savedNiches } = useAppStore()
 
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-4 text-xs text-slate-200">
-      <h2 className="text-sm font-semibold text-slate-50">Recent hunts</h2>
-      <ul className="mt-2 space-y-2">
-        {searchHistory.slice(0, 10).map((item) => (
-          <li
-            key={item.id}
-            className="flex items-center justify-between rounded-lg bg-slate-900 px-3 py-2"
-          >
-            <div>
-              <p className="text-xs font-medium text-emerald-300">
-                {item.profession}
-              </p>
-              <p className="text-[11px] text-slate-400">
-                {new Date(item.createdAt).toLocaleString(undefined, {
-                  month: 'short',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}{' '}
-                · {item.resultCount} ideas
-              </p>
-            </div>
-          </li>
-        ))}
-      </ul>
+    <div className="space-y-6">
+      <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 shadow-sm">
+        <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500">
+          Saved Niches ({savedNiches.length})
+        </h2>
+        {savedNiches.length === 0 ? (
+          <p className="mt-3 text-xs text-zinc-500">
+            No saved niches yet. Click &quot;Save&quot; on any card to keep it here.
+          </p>
+        ) : (
+          <ul className="mt-3 space-y-2 text-xs">
+            {savedNiches.map((niche) => (
+              <li
+                key={niche.id}
+                className="rounded-lg border border-zinc-200 bg-white p-3 shadow-xs"
+              >
+                <p className="font-bold text-zinc-950">{niche.title}</p>
+                <p className="mt-0.5 font-mono text-[11px] text-zinc-600">
+                  {niche.estimatedRevenueRange}
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 shadow-sm">
+        <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500">
+          Recent Searches ({searchHistory.length})
+        </h2>
+        {searchHistory.length === 0 ? (
+          <p className="mt-3 text-xs text-zinc-500">
+            Your recent hunt queries will appear here.
+          </p>
+        ) : (
+          <ul className="mt-3 space-y-2 text-xs">
+            {searchHistory.map((item) => (
+              <li
+                key={item.id}
+                className="flex items-center justify-between rounded-lg border border-zinc-200 bg-white p-2.5 text-zinc-800 shadow-xs"
+              >
+                <span className="font-medium">{item.profession}</span>
+                <span className="font-mono text-[10px] text-zinc-500">
+                  {item.resultCount} ideas
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   )
 }
-
-

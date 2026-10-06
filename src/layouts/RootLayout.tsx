@@ -12,7 +12,7 @@ interface RootLayoutProps {
 export function RootLayout({ children }: RootLayoutProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50">
+      <div className="flex min-h-screen flex-col bg-white text-zinc-900">
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />
@@ -20,6 +20,3 @@ export function RootLayout({ children }: RootLayoutProps) {
     </QueryClientProvider>
   )
 }
-
-
-

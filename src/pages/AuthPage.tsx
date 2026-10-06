@@ -1,12 +1,13 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAppStore } from '@/store/appStore'
 import { useEffect } from 'react'
+import { Target, ArrowRight } from 'lucide-react'
 
 const authSchema = z.object({
-  email: z.string().email('Enter a valid email'),
+  email: z.string().email('Enter a valid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
   name: z.string().optional(),
 })
@@ -35,7 +36,7 @@ export function AuthPage() {
   })
 
   const onSubmit = async (values: AuthFormValues) => {
-    await new Promise((resolve) => setTimeout(resolve, 600))
+    await new Promise((resolve) => setTimeout(resolve, 500))
 
     const name =
       mode === 'signup'
@@ -55,108 +56,120 @@ export function AuthPage() {
   const handleGoogleDemo = () => {
     setUser({
       id: 'demo-google',
-      email: 'demo@nichehunt.app',
-      name: 'Demo User',
+      email: 'builder@nichehunt.app',
+      name: 'Alex Rivera',
       plan: 'pro',
     })
     navigate('/dashboard', { replace: true })
   }
 
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-slate-950 px-4 py-8">
-      <section className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-900/80 p-6 text-slate-50 shadow-xl shadow-emerald-500/10">
-        <h1 className="text-xl font-semibold tracking-tight">
-          {mode === 'signup' ? 'Create your NicheHunt account' : 'Welcome back'}
+    <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-zinc-50 px-4 py-12">
+      <section className="w-full max-w-md rounded-2xl border border-zinc-200 bg-white p-8 text-zinc-900 shadow-lg">
+        <div className="flex items-center gap-2.5 mb-6">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-black text-white">
+            <Target className="h-4 w-4" />
+          </div>
+          <span className="text-sm font-bold tracking-tight text-zinc-950">
+            Niche<span className="text-black">Hunt</span>
+          </span>
+        </div>
+
+        <h1 className="text-xl font-bold tracking-tight text-zinc-950">
+          {mode === 'signup' ? 'Access the Intelligence Database' : 'Welcome back'}
         </h1>
-        <p className="mt-2 text-sm text-slate-400">
-          This is a demo authentication flow. Accounts are stored locally in your
-          browser for preview purposes only.
+        <p className="mt-1.5 text-xs text-zinc-500 leading-relaxed">
+          {mode === 'signup' 
+            ? 'Create an account to search thousands of validated market niches.' 
+            : 'Sign in to access your saved dossiers and custom playbooks.'}
         </p>
 
         <button
           type="button"
           onClick={handleGoogleDemo}
-          className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-950 px-4 py-2 text-sm font-medium text-slate-100 hover:bg-slate-900"
+          className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-300 bg-zinc-50 px-4 py-2.5 text-xs font-semibold text-zinc-800 hover:bg-zinc-100 hover:text-black transition"
         >
-          <span className="text-lg">G</span>
-          Continue with Google (demo)
+          <span>Continue with Demo Profile (1-Click)</span>
         </button>
 
-        <div className="my-5 flex items-center gap-3 text-xs text-slate-500">
-          <div className="h-px flex-1 bg-slate-800" />
-          <span>or with email</span>
-          <div className="h-px flex-1 bg-slate-800" />
+        <div className="my-5 flex items-center gap-3 text-[11px] text-zinc-400 font-mono">
+          <div className="h-px flex-1 bg-zinc-200" />
+          <span>or continue with email</span>
+          <div className="h-px flex-1 bg-zinc-200" />
         </div>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {mode === 'signup' && (
             <div>
-              <label className="block text-xs font-medium text-slate-200">
-                Name
+              <label className="block text-[11px] font-semibold text-zinc-700">
+                Your name
               </label>
               <input
-                type="text"
-                autoComplete="name"
                 {...register('name')}
-                className="mt-1 h-9 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 text-sm text-slate-50 outline-none placeholder:text-slate-500 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/40"
+                className="mt-1.5 h-9 w-full rounded-lg border border-zinc-300 bg-white px-3 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                placeholder="e.g. Sarah Connor"
               />
             </div>
           )}
 
           <div>
-            <label className="block text-xs font-medium text-slate-200">
-              Email
+            <label className="block text-[11px] font-semibold text-zinc-700">
+              Work email
             </label>
             <input
               type="email"
-              autoComplete="email"
               {...register('email')}
-              className="mt-1 h-9 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 text-sm text-slate-50 outline-none placeholder:text-slate-500 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/40"
+              className="mt-1.5 h-9 w-full rounded-lg border border-zinc-300 bg-white px-3 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              placeholder="you@company.com"
             />
             {errors.email && (
-              <p className="mt-1 text-xs text-rose-400">
-                {errors.email.message}
-              </p>
+              <p className="mt-1 text-[11px] text-red-500">{errors.email.message}</p>
             )}
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-200">
+            <label className="block text-[11px] font-semibold text-zinc-700">
               Password
             </label>
             <input
               type="password"
-              autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
               {...register('password')}
-              className="mt-1 h-9 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 text-sm text-slate-50 outline-none placeholder:text-slate-500 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/40"
+              className="mt-1.5 h-9 w-full rounded-lg border border-zinc-300 bg-white px-3 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+              placeholder="••••••••"
             />
             {errors.password && (
-              <p className="mt-1 text-xs text-rose-400">
-                {errors.password.message}
-              </p>
+              <p className="mt-1 text-[11px] text-red-500">{errors.password.message}</p>
             )}
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-slate-950 shadow-md shadow-emerald-500/25 transition hover:bg-emerald-400 disabled:opacity-60"
+            className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-black px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-zinc-800 shadow-sm"
           >
-            {mode === 'signup' ? 'Create account' : 'Continue'}
+            {mode === 'signup' ? 'Create Free Account' : 'Sign In'}
+            <ArrowRight className="h-4 w-4" />
           </button>
         </form>
 
-        <p className="mt-4 text-[11px] leading-relaxed text-slate-500">
-          NicheHunt uses simulated authentication and AI results in this demo.
-          Do not enter sensitive or real production credentials. In a real
-          deployment, use a provider like Firebase Auth or Auth0 with secure
-          password hashing and multi-factor authentication.
-        </p>
+        <div className="mt-6 text-center text-xs text-zinc-500">
+          {mode === 'signup' ? (
+            <p>
+              Already have an account?{' '}
+              <Link to="/auth/login" className="text-black hover:underline font-bold">
+                Sign in
+              </Link>
+            </p>
+          ) : (
+            <p>
+              Don&apos;t have an account?{' '}
+              <Link to="/auth/signup" className="text-black hover:underline font-bold">
+                Create one free
+              </Link>
+            </p>
+          )}
+        </div>
       </section>
     </main>
   )
 }
-

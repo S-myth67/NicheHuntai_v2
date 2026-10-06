@@ -20,48 +20,48 @@ export function DashboardLayout({ title, children }: DashboardLayoutProps) {
   if (!user) return null
 
   return (
-    <main className="bg-slate-950">
-      <div className="mx-auto flex max-w-6xl gap-6 px-4 py-6 md:px-6">
-        <aside className="hidden w-56 flex-shrink-0 rounded-2xl border border-slate-800 bg-slate-900/80 p-4 text-sm text-slate-200 md:block">
+    <main className="bg-white text-zinc-900 min-h-screen">
+      <div className="mx-auto flex max-w-6xl gap-6 px-4 py-8 md:px-6">
+        <aside className="hidden w-60 flex-shrink-0 rounded-2xl border border-zinc-200 bg-zinc-50 p-5 text-sm text-zinc-800 md:block shadow-sm">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-sm font-semibold uppercase text-emerald-300">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-sm font-bold uppercase text-white">
               {user.name.charAt(0).toUpperCase()}
             </div>
             <div>
-              <p className="text-sm font-medium text-slate-50">
+              <p className="text-sm font-bold text-zinc-950">
                 {user.name}
               </p>
-              <p className="text-[11px] text-slate-400">{user.email}</p>
+              <p className="text-[11px] text-zinc-500 font-mono">{user.email}</p>
             </div>
           </div>
-          <div className="mt-4 rounded-lg border border-emerald-500/40 bg-slate-900 px-2 py-1.5 text-[11px] text-emerald-300">
-            {user.plan.toUpperCase()} plan
+          <div className="mt-4 rounded-lg border border-zinc-300 bg-white px-2.5 py-1.5 text-[11px] font-mono font-bold text-black shadow-xs">
+            {user.plan.toUpperCase()} PLAN ACTIVE
           </div>
-          <nav className="mt-6 space-y-2 text-[13px]">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-500">
-              Overview
+          <nav className="mt-6 space-y-2 text-xs">
+            <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 font-mono">
+              Workspace
             </p>
-            <p className="rounded-md bg-slate-800 px-2 py-1.5 text-slate-50">
-              Niche hunts
+            <p className="rounded-lg bg-black px-3 py-2 text-white font-semibold">
+              Niche Hunts & Dossiers
             </p>
             <button
               type="button"
               onClick={handleLogout}
-              className="mt-4 inline-flex items-center gap-1 rounded-md px-2 py-1.5 text-[11px] text-slate-400 hover:bg-slate-800"
+              className="mt-6 inline-flex w-full items-center gap-2 rounded-lg border border-zinc-200 bg-white px-3 py-2 text-xs font-semibold text-zinc-700 hover:bg-zinc-100 hover:text-black transition"
             >
-              <LogOut className="h-3 w-3" />
-              Log out
+              <LogOut className="h-3.5 w-3.5" />
+              Sign out
             </button>
           </nav>
         </aside>
         <section className="flex-1">
-          <header className="mb-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+          <header className="mb-6 flex flex-col gap-1 md:flex-row md:items-center md:justify-between border-b border-zinc-200 pb-4">
             <div>
-              <h1 className="text-xl font-semibold tracking-tight text-slate-50">
+              <h1 className="text-2xl font-bold tracking-tight text-zinc-950">
                 {title}
               </h1>
-              <p className="text-xs text-slate-400">
-                Discover AI-simulated niches, profit ranges, and launch plans.
+              <p className="text-xs text-zinc-500">
+                Search real-time whitespace opportunities, pricing models, and launch blueprints.
               </p>
             </div>
           </header>
@@ -71,5 +71,3 @@ export function DashboardLayout({ title, children }: DashboardLayoutProps) {
     </main>
   )
 }
-
-

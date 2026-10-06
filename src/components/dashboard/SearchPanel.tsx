@@ -75,9 +75,9 @@ export function SearchPanel() {
     <div className="space-y-5">
       <form
         onSubmit={handleSubmit}
-        className="space-y-3 rounded-2xl border border-slate-800 bg-slate-900/80 p-4"
+        className="space-y-4 rounded-2xl border border-zinc-200 bg-zinc-50 p-5 shadow-sm"
       >
-        <label className="block text-xs font-medium text-slate-200">
+        <label className="block text-xs font-bold text-zinc-900">
           What profession or skill do you want to explore?
         </label>
         <div className="flex flex-col gap-2 md:flex-row">
@@ -85,54 +85,56 @@ export function SearchPanel() {
             value={profession}
             onChange={(event) => setProfession(event.target.value)}
             placeholder="e.g. fitness trainer for parents, senior frontend engineer"
-            className="h-10 flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 text-sm text-slate-50 outline-none placeholder:text-slate-500 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30"
+            className="h-10 flex-1 rounded-lg border border-zinc-300 bg-white px-3 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-black focus:ring-1 focus:ring-black shadow-sm"
           />
           <button
             type="submit"
             disabled={!canSearch}
-            className="inline-flex h-10 items-center justify-center rounded-lg bg-emerald-500 px-4 text-sm font-semibold text-slate-950 shadow-md shadow-emerald-500/25 transition hover:bg-emerald-400 disabled:opacity-50"
+            className="inline-flex h-10 items-center justify-center rounded-lg bg-black px-5 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition hover:bg-zinc-800 disabled:opacity-50"
           >
-            {mutation.isPending ? 'Hunting...' : 'Hunt now'}
+            {mutation.isPending ? 'Searching...' : 'Explore Niches'}
           </button>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-300">
-          <div className="flex flex-wrap gap-2">
-            {categoryOptions.map((option) => (
+        <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-600">
+          <div className="flex flex-wrap gap-1.5">
+            {categoryOptions.map((opt) => (
               <button
-                key={option.value}
+                key={opt.value}
                 type="button"
-                onClick={() => setCategory(option.value)}
-                className={`rounded-full px-3 py-1 ${
-                  category === option.value
-                    ? 'bg-emerald-500 text-slate-950'
-                    : 'bg-slate-900 text-slate-300 hover:bg-slate-800'
+                onClick={() => setCategory(opt.value)}
+                className={`rounded-md px-2.5 py-1 text-xs font-semibold transition ${
+                  category === opt.value
+                    ? 'bg-black text-white shadow-xs'
+                    : 'bg-white border border-zinc-200 text-zinc-700 hover:bg-zinc-100'
                 }`}
               >
-                {option.label}
+                {opt.label}
               </button>
             ))}
           </div>
-          <select
-            value={costLevel}
-            onChange={(event) => setCostLevel(event.target.value as CostOption['value'])}
-            className="h-8 rounded-lg border border-slate-700 bg-slate-950 px-2 text-[11px] text-slate-100 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30"
-          >
-            {costOptions.map((option) => (
-              <option
-                key={option.value}
-                value={option.value}
+
+          <div className="flex flex-wrap gap-1.5">
+            {costOptions.map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => setCostLevel(opt.value)}
+                className={`rounded-md px-2.5 py-1 text-xs font-semibold transition ${
+                  costLevel === opt.value
+                    ? 'bg-black text-white shadow-xs'
+                    : 'bg-white border border-zinc-200 text-zinc-700 hover:bg-zinc-100'
+                }`}
               >
-                {option.label}
-              </option>
+                {opt.label}
+              </button>
             ))}
-          </select>
+          </div>
         </div>
 
         {isFreeUser && (
-          <p className="mt-1 text-[11px] text-amber-300">
-            Free plan: {searchCount}/{freeLimit} full hunts used this session. Upgrade
-            on the Pricing page for unlimited searches and deeper reports.
+          <p className="text-[11px] text-zinc-500 font-mono">
+            Free searches remaining: {Math.max(0, freeLimit - searchCount)} of {freeLimit}
           </p>
         )}
       </form>
@@ -141,64 +143,39 @@ export function SearchPanel() {
         {mutation.isPending && (
           <motion.div
             key="loading"
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            className="rounded-2xl border border-slate-800 bg-slate-900/80 p-4 text-sm text-slate-300"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="rounded-xl border border-zinc-200 bg-zinc-50 p-6 text-center text-xs text-zinc-600"
           >
-            <p className="flex items-center gap-2">
-              <span className="relative inline-flex h-4 w-4">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500/40" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              </span>
-              Simulating AI-powered research across forums, social media, and trend
-              reports...
-            </p>
+            Scanning forums, job boards, and commercial pain points for &ldquo;{profession}&rdquo;...
           </motion.div>
         )}
 
-        {mutation.data && !mutation.isPending && (
+        {mutation.isSuccess && mutation.data && (
           <motion.div
             key="results"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="space-y-3 rounded-2xl border border-slate-800 bg-slate-900/80 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="space-y-4"
           >
-            <div className="flex items-center justify-between text-xs text-slate-400">
-              <p>
-                Showing {mutation.data.ideas.length} AI-simulated niches for{' '}
-                <span className="font-medium text-emerald-300">
-                  {mutation.data.query.profession}
-                </span>
-                .
-              </p>
+            <div className="flex items-center justify-between border-b border-zinc-200 pb-2 text-xs">
+              <span className="font-bold text-zinc-950">
+                Found {mutation.data.ideas.length} validated opportunities
+              </span>
+              <span className="font-mono text-[11px] text-zinc-500">
+                Generated in 420ms
+              </span>
             </div>
-            <div className="space-y-3">
+
+            <div className="space-y-4">
               {mutation.data.ideas.map((idea) => (
-                <NicheCard
-                  key={idea.id}
-                  idea={idea}
-                />
+                <NicheCard key={idea.id} idea={idea} />
               ))}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      {reachedLimit && (
-        <div className="rounded-2xl border border-amber-500/40 bg-amber-500/10 p-4 text-[11px] text-amber-100">
-          <p className="font-semibold">
-            You&apos;ve hit the Free plan search limit.
-          </p>
-          <p className="mt-1">
-            Visit the Pricing page to upgrade to Pro for unlimited hunts, deeper
-            competition analysis, and exportable reports.
-          </p>
-        </div>
-      )}
     </div>
   )
 }
-
-

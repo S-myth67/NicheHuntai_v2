@@ -22,68 +22,68 @@ export function ProfilePage() {
 
   return (
     <DashboardLayout title="Profile & settings">
-      <div className="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/80 p-4 text-sm text-slate-200">
+      <div className="space-y-6 rounded-2xl border border-zinc-200 bg-zinc-50 p-6 text-sm text-zinc-800 shadow-sm">
         <form
           onSubmit={handleSave}
-          className="space-y-3"
+          className="space-y-4 rounded-xl border border-zinc-200 bg-white p-5 shadow-xs"
         >
           <div>
-            <label className="block text-xs font-medium text-slate-200">
+            <label className="block text-xs font-bold text-zinc-900">
               Display name
             </label>
             <input
               value={name}
               onChange={(event) => setName(event.target.value)}
-              className="mt-1 h-9 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 text-sm text-slate-50 outline-none placeholder:text-slate-500 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30"
+              className="mt-1.5 h-9 w-full rounded-lg border border-zinc-300 bg-white px-3 text-sm text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-black focus:ring-1 focus:ring-black"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-slate-200">
-              Email
+            <label className="block text-xs font-bold text-zinc-900">
+              Email address
             </label>
-            <p className="mt-1 text-xs text-slate-300">{user.email}</p>
+            <p className="mt-1 text-xs font-mono text-zinc-600">{user.email}</p>
           </div>
           <button
             type="submit"
-            className="inline-flex items-center justify-center rounded-lg bg-emerald-500 px-4 py-1.5 text-xs font-semibold text-slate-950 shadow-md shadow-emerald-500/25 hover:bg-emerald-400"
+            className="inline-flex items-center justify-center rounded-lg bg-black px-4 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:bg-zinc-800 transition"
           >
             Save changes
           </button>
         </form>
 
-        <div className="mt-4 grid gap-3 text-xs text-slate-300 md:grid-cols-2">
-          <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
-            <p className="font-semibold text-slate-100">
+        <div className="grid gap-4 text-xs md:grid-cols-2">
+          <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-xs">
+            <p className="font-bold text-zinc-950">
               Subscription
             </p>
-            <p className="mt-1 text-slate-300 capitalize">
-              Current plan: {user.plan}
+            <p className="mt-1 text-zinc-700 capitalize font-medium">
+              Current plan: <span className="font-bold uppercase font-mono">{user.plan}</span>
             </p>
-            <p className="mt-1 text-slate-400">
+            <p className="mt-1 text-zinc-500">
               Visit the Pricing page to upgrade to Pro or Enterprise in this demo.
             </p>
           </div>
-          <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
-            <p className="font-semibold text-slate-100">
+          <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-xs">
+            <p className="font-bold text-zinc-950">
               Data & account
             </p>
-            <p className="mt-1 text-slate-400">
+            <p className="mt-1 text-zinc-500">
               This demo stores your account locally in your browser only. You can
               clear it at any time.
             </p>
-            <div className="mt-2 flex gap-2">
+            <div className="mt-3 flex gap-2">
               <button
                 type="button"
-                className="rounded-lg border border-slate-700 px-3 py-1 text-[11px] text-slate-200 hover:bg-slate-900"
+                className="rounded-lg border border-zinc-300 bg-zinc-50 px-3 py-1.5 text-[11px] font-semibold text-zinc-800 hover:bg-zinc-100"
               >
-                Download my data (mock)
+                Download data (mock)
               </button>
               <button
                 type="button"
                 onClick={handleDelete}
-                className="rounded-lg border border-rose-500/60 px-3 py-1 text-[11px] text-rose-300 hover:bg-rose-500/10"
+                className="rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-[11px] font-semibold text-red-600 hover:bg-red-100"
               >
-                Delete account (demo)
+                Delete account
               </button>
             </div>
           </div>
@@ -92,4 +92,3 @@ export function ProfilePage() {
     </DashboardLayout>
   )
 }
-
